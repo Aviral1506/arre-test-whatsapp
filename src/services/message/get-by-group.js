@@ -14,7 +14,9 @@ const getMessagesByGroup = async (params) => {
         group_id
     }
 
-    const result = await MessageModel.find(messageQuery);
+    const limitValue = 10; // for max 10 messages per request
+
+    const result = await MessageModel.find(messageQuery).limit(limitValue);
     if (isEmpty(result) === true) {
         throw new Error('no messages in group');   // to handle no messages in group case
     }
